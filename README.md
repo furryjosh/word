@@ -12,3 +12,8 @@ Setup
 3. Install tomcat
 4. If running on a local machine you will need to set it your configurations so that you
    make an exploded war that gets deployed to your tomcat server.
+
+Testing
+================
+In order to test properly you will have to make changes to the WordApplicationTests.java
+file.  You will have to

@@ -33,6 +33,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 public class WordApplicationTests {
 
+	//TODO: you will have to change the testfolder located on your machine in the project
+	private static final String folderPath = "/Users/joshfurr/Renticity/word/src/main/resources/testfolder/";
+
 	@Autowired
 	private WebApplicationContext wac;
 
@@ -52,22 +55,19 @@ public class WordApplicationTests {
 	public void setUp(){
 		mockMvc = MockMvcBuilders.webAppContextSetup( wac ).build();
 
-		// TODO: in order to successfully delete the folder you will have to change this to the test
-		// TODO: folder on you machine + /test
-		File f = new File("/Users/joshfurr/Renticity/word/src/main/resources/testfolder/");
+		File f = new File( folderPath);
 		if (f.exists() && f.isDirectory()) {
 			deleteTestDir(f);
 		}
 	}
 
 	@Test
-//	@Ignore //TODO: you will have to remove this in order to run the tests
+	@Ignore //TODO: you will have to comment this out in order to run the tests
 	public void findFileOnPath() throws Exception {
 
 		Map<String, String> requestMap = new HashMap<>();
 
-		//TODO: you will have to change the test folder on your machine
-		requestMap.put("1", "/Users/joshfurr/Renticity/word/src/main/resources/testfolder");
+		requestMap.put("1", folderPath);
 
 		Map<String, Map<String, Integer>> responseMap;
 
