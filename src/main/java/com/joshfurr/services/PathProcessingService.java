@@ -261,6 +261,12 @@ public class PathProcessingService {
 
         final int BUFFER = 2048;
 
+        BufferedInputStream bis = null;
+
+        FileOutputStream fos = null;
+
+        BufferedOutputStream bos = null;
+
         try {
 
             FileInputStream fis = new FileInputStream(file);
@@ -293,11 +299,11 @@ public class PathProcessingService {
 
                     new File( newFile.getParent() ).mkdirs();
 
-                    BufferedInputStream bis = new BufferedInputStream( new ZipFile( file ).getInputStream( entry ) );
+                    bis = new BufferedInputStream( new ZipFile( file ).getInputStream( entry ) );
 
-                    FileOutputStream fos = new FileOutputStream( newFile );
+                    fos = new FileOutputStream( newFile );
 
-                    BufferedOutputStream bos = new BufferedOutputStream( fos, BUFFER );
+                    bos = new BufferedOutputStream( fos, BUFFER );
 
                     int currentByte;
 
@@ -310,13 +316,7 @@ public class PathProcessingService {
 
                     }
 
-                    bos.flush();
 
-                    bos.close();
-
-                    fos.close();
-
-                    bis.close();
 
                 }
 
@@ -324,11 +324,33 @@ public class PathProcessingService {
 
             zis.close();
 
-        } catch( Exception e ) {
+        } catch ( Exception e ) {
 
             e.printStackTrace();
 
             LOGGER.error( e.getMessage() );
+
+        } finally {
+
+            if ( bos != null ){
+
+                bos.flush();
+
+                bos.close();
+            }
+
+            if ( fos != null ){
+
+                fos.close();
+
+            }
+
+            if ( bis != null ){
+
+                bis.close();
+
+            }
+
 
         }
 

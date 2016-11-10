@@ -62,7 +62,8 @@ public class WordApplicationTests {
 	}
 
 	@Test
-	@Ignore //TODO: you will have to comment this out in order to run the tests
+	@SuppressWarnings("unchecked")
+//	@Ignore //TODO: you will have to comment this out in order to run the tests
 	public void findFileOnPath() throws Exception {
 
 		Map<String, String> requestMap = new HashMap<>();
